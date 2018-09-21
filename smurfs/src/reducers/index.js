@@ -13,6 +13,39 @@
    error: null
  }
 */
+import { SMURF_FETCHING, SMURF_SUCCESS, SMURF_ERROR } from "../actions";
+
+
+
+const initalState = {
+  smurfs: [],
+  fetchingSmurfs: false,
+  addingSmurf: false,
+  succes: false,
+  error: null
+};
+
+let index = 0;
+
+const smurfReducers = (state = initalState, action) => {
+  switch (action.type) {
+    case SMURF_FETCHING:
+      return Object.assign({}, state, {fetchingSmurfs: true});
+
+    case SMURF_SUCCESS:
+      const data = Object.assign({}, ...action.data, {id: index});
+      index++;
+      return Object.assign({}, state, {smurfs: [data], fetchingSmurfs: false});
+
+    case SMURF_ERROR:
+      return Object.assign({}, state, { fetchingSmurfs: false, error: 'Could not find smurfs.'});
+
+    default:
+      return state;
+  }
+};
+
+export default smurfReducers;
 
 /*
   You'll only need one smurf reducer for this project.
