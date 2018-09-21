@@ -1,13 +1,13 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 function Smurf(props) {
   return (
-    <Fragment>
+    <div className="smurf">
       <h2>{props.smurf.name}</h2>
-      <p>{props.smurf.age}</p>
-      <p>{props.smurf.height}</p>
+      <p>{props.smurf.age} years old</p>
+      <p>{props.smurf.height} cm</p>
       <button onClick={(event) => props.deleteClick(event, props.smurf.id)}>X</button>
-    </Fragment>
+    </div>
   );
 }
 

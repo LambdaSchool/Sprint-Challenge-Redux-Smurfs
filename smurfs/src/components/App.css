@@ -1,28 +1,82 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  background-image: url("../images/Smurf-village.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 800px;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+  max-width: 800px;
+  width: 100%;
+  margin: 100px auto;
+  background: dodgerblue;
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+.App h1 {
+  font-size: 3rem;
+  text-align: center;
 }
 
-.App-intro {
-  font-size: large;
+.smurfs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 2%;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.smurf {
+  width: 25%;
+  position: relative;
+  padding: 5px 5%;
+  margin: 10px 5%;
+  background: lavender;
+  color: black;
+}
+
+.smurf button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  color: red;
+  font-size: 0.8rem;
+  cursor: pointer
+}
+
+.App form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px auto;
+  padding-bottom: 20px;
+}
+
+.App form label {
+  display: block;
+  margin-top: 5px;
+}
+
+.App form input {
+  margin-bottom: 10px;
+}
+
+.App form button {
+  background:white; 
+  border: 1px solid black;
+  border-radius: 3px;
+  width: 20%;
+  padding: 5px 1%;
+  margin-top: 5px;
 }

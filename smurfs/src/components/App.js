@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 
@@ -34,9 +34,11 @@ class App extends Component {
   handleClick = e => {
     e.preventDefault();
     this.props.addSmurf(this.state);
+    this.setState({name: '', age: '', height: ''})
   }
 
   deleteClick = (e, id) => {
+    e.preventDefault();
     this.props.deleteSmurf(id);
   }
 
@@ -45,12 +47,13 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Smurfs Village</h1>
-        <div>
-          {this.props.smurfs.map(smurf => (
-            <div key={smurf.id}>
-              <Smurf smurf={smurf} deleteClick={this.deleteClick} />
-            </div>
-          ))}
+        <div className="smurfs">
+          {this.props.fetching ? <h2>Let's go to the village...</h2> : <Fragment>
+           {this.props.smurfs.map(smurf => (
+              <Smurf key={smurf.id} smurf={smurf} deleteClick={this.deleteClick} />
+            ))}
+          </Fragment>
+          }
         </div>
         <SmurfForm 
           input = {this.state}
@@ -65,6 +68,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     smurfs: state.smurfs,
+    fetching: state.fetchingSmurfs
   }
 }
 
