@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 
-import { smurfGet } from '../actions';
+import { smurfGet, addSmurf } from '../actions';
 import Smurf from '../Presontatnal/Smurf';
 import SmurfForm from '../Presontatnal/SmurfForm';
 /*
@@ -13,12 +13,29 @@ import SmurfForm from '../Presontatnal/SmurfForm';
  */
 class App extends Component {
   state = {
-
+    name: '',
+    age: 0,
+    height: ''
   }
 
   componentDidMount() {
     this.props.smurfGet();
   }
+
+  handleChange = e => {
+    if(e.target.name === 'age') {
+      const number = parseInt(e.target.value, 10);
+      this.setState({ [e.target.name]: number });
+    } else {
+      this.setState({ [e.target.name]: e.target.value })
+    }
+  }
+
+  handleClick = e => {
+    e.preventDefault();
+    this.props.addSmurf(this.state);
+  }
+
 
   render() {
     return (
@@ -31,7 +48,11 @@ class App extends Component {
             </div>
           ))}
         </div>
-        <SmurfForm />
+        <SmurfForm 
+          input = {this.state}
+          handleChange = {this.handleChange}
+          handleClick = {this.handleClick}
+        />
       </div>
     );
   }
@@ -43,4 +64,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { smurfGet })(App);
+export default connect(mapStateToProps, { smurfGet, addSmurf })(App);

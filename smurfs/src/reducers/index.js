@@ -25,7 +25,6 @@ const initalState = {
   error: null
 };
 
-let index = 0;
 
 const smurfReducers = (state = initalState, action) => {
   switch (action.type) {
@@ -33,9 +32,7 @@ const smurfReducers = (state = initalState, action) => {
       return Object.assign({}, state, {fetchingSmurfs: true});
 
     case SMURF_SUCCESS:
-      const data = Object.assign({}, ...action.data, {id: index});
-      index++;
-      return Object.assign({}, state, {smurfs: [data], fetchingSmurfs: false});
+      return Object.assign({}, state, {smurfs: action.data, fetchingSmurfs: false});
 
     case SMURF_ERROR:
       return Object.assign({}, state, { fetchingSmurfs: false, error: 'Could not find smurfs.'});

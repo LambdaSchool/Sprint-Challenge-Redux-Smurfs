@@ -28,3 +28,12 @@ export const smurfGet = () => {
       .catch(err => dispatch({type: SMURF_ERROR}));
   } 
 }
+
+export const addSmurf = smurf => {
+  return dispatch => {
+    dispatch({type: SMURF_FETCHING});
+    axios.post('http://localhost:3333/smurfs', smurf)
+      .then(response => dispatch({type: SMURF_SUCCESS, data: response.data }))
+      .catch(err => console.log(err))
+  }
+}
