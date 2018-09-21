@@ -1,9 +1,10 @@
 import React from "react";
 
 function SmurfForm(props) {
+  console.log(props.input.editId)
   return (
     <form>
-      <h2>New Smurf</h2>
+      <h2>{props.input.editId? "Edit Smurf" : "Add Smurf" }</h2>
       <div>
         <label>Name</label>
         <input
@@ -35,7 +36,7 @@ function SmurfForm(props) {
           onChange={props.handleChange}
         />
       </div>
-      <button onClick={props.handleClick}>Add Smurf</button>
+      <button onClick={props.handleClick}>{props.input.editId? "Edit Smurf" : "Add Smurf" }</button>
     </form>
   );
 }

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import "./App.css";
 import { connect } from "react-redux";
 
-import { smurfGet, addSmurf, deleteSmurf } from "../actions";
+import { smurfGet, addSmurf, deleteSmurf, updateSmurf } from "../actions";
 import Smurf from "../Presontatnal/Smurf";
 import SmurfForm from "../Presontatnal/SmurfForm";
 /*
@@ -15,7 +15,8 @@ class App extends Component {
   state = {
     name: "",
     age: "",
-    height: ""
+    height: "",
+    editId: null
   };
 
   componentDidMount() {
@@ -33,14 +34,23 @@ class App extends Component {
 
   handleClick = e => {
     e.preventDefault();
-    this.props.addSmurf(this.state);
-    this.setState({ name: "", age: "", height: "" });
+    this.state.editId !== null ? this.props.updateSmurf(this.state): this.props.addSmurf(this.state);
+    this.setState({ name: "", age: "", height: "", editId: null });
   };
 
   deleteClick = (e, id) => {
     e.preventDefault();
     this.props.deleteSmurf(id);
   };
+
+  editSmurf =(smurf) => {
+    this.setState({
+      name: smurf.name,
+      age: smurf.age,
+      height: smurf.height,
+      editId: smurf.id
+    },() => console.log(this.state))
+  }
 
   render() {
     return (
@@ -56,6 +66,7 @@ class App extends Component {
                   key={smurf.id}
                   smurf={smurf}
                   deleteClick={this.deleteClick}
+                  editSmurf={this.editSmurf}
                 />
               ))}
             </Fragment>
@@ -80,5 +91,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { smurfGet, addSmurf, deleteSmurf }
+  { smurfGet, addSmurf, deleteSmurf, updateSmurf }
 )(App);

@@ -52,3 +52,15 @@ export const deleteSmurf = id => {
     }, 500)
   };
 };
+
+export const updateSmurf = smurf => {
+  return dispatch => {
+    dispatch({ type: SMURF_FETCHING });
+    setTimeout(() => {
+      axios
+      .put(`http://localhost:3333/smurfs/${smurf.editId}`, smurf)
+      .then(response => dispatch({ type: SMURF_SUCCESS, data: response.data }))
+      .catch(err => dispatch({ type: SMURF_ERROR }));
+    }, 500)
+  }
+};

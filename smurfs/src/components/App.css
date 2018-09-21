@@ -44,7 +44,7 @@ body {
   color: black;
 }
 
-.smurf button {
+.smurf .delete {
   position: absolute;
   top: 0;
   right: 0;
