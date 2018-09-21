@@ -15,8 +15,6 @@
 */
 import { SMURF_FETCHING, SMURF_SUCCESS, SMURF_ERROR } from "../actions";
 
-
-
 const initalState = {
   smurfs: [],
   fetchingSmurfs: false,
@@ -25,17 +23,22 @@ const initalState = {
   error: null
 };
 
-
 const smurfReducers = (state = initalState, action) => {
   switch (action.type) {
     case SMURF_FETCHING:
-      return Object.assign({}, state, {fetchingSmurfs: true});
+      return Object.assign({}, state, { fetchingSmurfs: true });
 
     case SMURF_SUCCESS:
-      return Object.assign({}, state, {smurfs: action.data, fetchingSmurfs: false});
+      return Object.assign({}, state, {
+        smurfs: action.data,
+        fetchingSmurfs: false
+      });
 
     case SMURF_ERROR:
-      return Object.assign({}, state, { fetchingSmurfs: false, error: 'Could not find smurfs.'});
+      return Object.assign({}, state, {
+        fetchingSmurfs: false,
+        error: "Could not find smurfs."
+      });
 
     default:
       return state;
