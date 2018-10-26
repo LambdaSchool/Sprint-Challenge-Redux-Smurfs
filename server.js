@@ -1,9 +1,10 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const port = 3333;
 
 const server = express();
-server.use(express.json());
+server.use(bodyParser.json());
 server.use(cors());
 
 const sendUserError = (msg, res) => {
@@ -14,19 +15,22 @@ const sendUserError = (msg, res) => {
 
 let smurfs = [
   {
-    name: 'Brainey',
+    id: 0,
+    name: 'Brainey Smurf',
     age: 200,
-    height: '5cm'
+    height: '8 cm'
   }
 ];
 server.get('/smurfs', (req, res) => {
-  res.json(smurfs);
+  setTimeout(() => {
+    res.json(smurfs);
+  }, 350);
 });
-let smurfId = 0;
+let smurfId = 1;
 
 server.post('/smurfs', (req, res) => {
   const { name, age, height } = req.body;
-  const newSmurf = { name, age, height, id: smurfId };
+  const newSmurf = { id: smurfId, name, age, height };
   if (!name || !age || !height) {
     return sendUserError(
       'Ya gone did smurfed! Name/Age/Height are all required to create a smurf in the smurf DB.',
@@ -37,10 +41,7 @@ server.post('/smurfs', (req, res) => {
     return smurf.name === name;
   };
   if (smurfs.find(findSmurfByName)) {
-    return sendUserError(
-      `Ya gone did smurfed! ${name} already exists in the smurf DB.`,
-      res
-    );
+    return sendUserError(`Ya gone did smurfed! ${name} already exists in the smurf DB.`, res);
   }
 
   smurfs.push(newSmurf);

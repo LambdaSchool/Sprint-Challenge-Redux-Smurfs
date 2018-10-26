@@ -3,3 +3,16 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+li {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.smurf-content {
+  margin-right: 15px;
+}
+
+.x-square {
+  cursor: pointer;
+}
