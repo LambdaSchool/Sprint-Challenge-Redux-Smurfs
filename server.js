@@ -14,19 +14,20 @@ const sendUserError = (msg, res) => {
 
 let smurfs = [
   {
+    id: 0,
     name: 'Brainey',
     age: 200,
-    height: '5cm'
-  }
+    height: '5cm',
+  },
 ];
 server.get('/smurfs', (req, res) => {
   res.json(smurfs);
 });
-let smurfId = 0;
+let smurfId = 1;
 
 server.post('/smurfs', (req, res) => {
   const { name, age, height } = req.body;
-  const newSmurf = { name, age, height, id: smurfId };
+  const newSmurf = { id: smurfId, name, age, height };
   if (!name || !age || !height) {
     return sendUserError(
       'Ya gone did smurfed! Name/Age/Height are all required to create a smurf in the smurf DB.',
