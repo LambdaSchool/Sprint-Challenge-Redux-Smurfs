@@ -1,22 +1,34 @@
-import React, { Component } from 'react';
-import './App.css';
-/*
- to wire this component up you're going to need a few things.
- I'll let you do this part on your own. 
- Just remember, `how do I `connect` my components to redux?`
- `How do I ensure that my component links the state to props?`
- */
+import React, { Component } from "react";
+import "./App.css";
+import SmurfVillage from "./SmurfVillage";
+import Form from "./Form";
+import { connect } from "react-redux";
+import { getSmurfs } from "../actions";
 class App extends Component {
+  componentDidMount() {
+    this.props.getSmurfs();
+  }
+
   render() {
     return (
       <div className="App">
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your Redux version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
+        <h1>SMURF VILLAGE</h1>
+        <hr />
+        <Form />
+        <hr />
+        <SmurfVillage {...this.props} />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = ({ smurfs, fetchingSmurfs, error }) => ({
+  smurfs,
+  fetchingSmurfs,
+  error
+});
+
+export default connect(
+  mapStateToProps,
+  { getSmurfs }
+)(App);
